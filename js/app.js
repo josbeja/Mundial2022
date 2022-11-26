@@ -3,6 +3,7 @@ import { init } from "./Player.js";
 const main = document.getElementById('app');
 const btnNext = document.getElementById('next-channel');
 const btnPrev = document.getElementById('prev-channel');
+const btnDarkMode = document.getElementById('darkmode');
 const channelName = document.getElementById('channel');
 const messageContainer = document.getElementById('message-channel');
 
@@ -116,6 +117,18 @@ const prevChannel = () => {
     changeChannel(channels, count);
 }
 
+const darkMode = () => {
+	const span = btnDarkMode.getElementsByTagName('span')[0];
+
+	document.body.classList.toggle('dark');
+	btnDarkMode.classList.toggle('on');
+
+	if (document.body.classList.contains('dark'))
+		span.innerText = 'light_mode';
+	else
+		span.innerText = 'dark_mode';	
+}
+
 // change channel =================================================
 document.addEventListener('keydown', e => {
     if(e.key === 'ArrowRight'){
@@ -132,4 +145,8 @@ btnNext.addEventListener('click', e => {
 
 btnPrev.addEventListener('click', e => {
     prevChannel();
+});
+
+btnDarkMode.addEventListener('click', e => {
+    darkMode();
 });
