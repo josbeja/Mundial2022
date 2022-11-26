@@ -6,6 +6,11 @@
 body{
     margin: 0;
     padding: 0;
+	transition: background-color 0.5s;
+}
+
+body.dark {
+  background-color: #1c1b22;
 }
 
 main{
@@ -107,4 +112,28 @@ video{
     justify-content: center;
     gap: 10px;
     width: 100%;
+}
+
+#darkmode span.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 40
+}
+
+#darkmode span.material-symbols-outlined:hover {
+  font-variation-settings: 'FILL' 1
+}
+
+#darkmode {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 4px;
+  cursor: pointer;
+}
+
+#darkmode.on {
+  color: darkgray;
 }

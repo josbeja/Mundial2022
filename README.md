@@ -2,3 +2,6 @@
 
 tutorial de como usar la app en mi [tiktok](https://www.tiktok.com/@zalazarc20)
 
+Lista de cambios:
+	-Dark Mode
+	
