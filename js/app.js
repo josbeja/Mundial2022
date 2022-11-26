@@ -31,13 +31,6 @@ const channels = [
 ]
 let count = 0;
 
-const allChannels = async () => {
-    const req = await fetch('https://raw.githubusercontent.com/zalazarc20/canales-deportivos-2.0-frontend/main/ch.json');
-    console.log(await req.json())
-}
-
-allChannels()
-
 // functions =============================================
 const detectIndex = (hash) => {
     let nameChannel = hash.slice(1);
