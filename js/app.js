@@ -1,12 +1,13 @@
 import { init } from "./Player.js";
-
-const main = document.getElementById('app');
-const btnNext = document.getElementById('next-channel');
-const btnPrev = document.getElementById('prev-channel');
-const btnDarkMode = document.getElementById('darkmode');
-const channelName = document.getElementById('channel');
-const messageContainer = document.getElementById('message-channel');
-
+import { V, on, useLS } from "./helpers.js";
+const main = V('#app');
+const btnNext = V('#next-channel');
+const btnPrev = V('#prev-channel');
+const btnDarkMode = V('#darkmode');
+const channelName = V('#channel');
+const messageContainer = V('#message-channel');
+const light_mode = "light_mode",
+      dark_mode = "dark_mode";
 const channels = [
     {
         name: 'dSports',
@@ -54,19 +55,20 @@ const changeChannel = (arr, i = 0) => {
 }
 
 const validHash = (hash) => {
-    // saque esté canal del if hash === '#directvSports'
-    if( hash === '#tycSports' || hash === '#tvPublica' || hash === '#dSports' || hash === '#deporTv' || hash === '#azteca7'){
+    // Se valida el hash directamente con la lista de canales
+    const isValidHash = ({name}) => `#${name}` === hash;
+    const ifValidHash = channels.some(isValidHash);
+    if (ifValidHash){
         count = detectIndex(hash);
         let {url} = channels[count];
         return url;
     }
     if(hash === '') return {error: 'No pasaste ningun hash'}
-
     return {error: 'error esté hash NO ES VALIDO'}
 }
 
 // add shaka-player ===========================================
-document.addEventListener('shaka-ui-loaded', async e => {
+on(document,'shaka-ui-loaded', async e => {
     const channel = channels[count].name
     location.hash = channel
     addName(channel.toUpperCase())
@@ -80,19 +82,21 @@ document.addEventListener('shaka-ui-loaded', async e => {
 });
 
 // detect hash in load DOM =========================================
-document.addEventListener('DOMContentLoaded', e => {
+on(document,'DOMContentLoaded', () => {
     let {hash} = location;
 
     let val = validHash(hash);
     typeof val === 'string'
         ? init(val)
         : console.error(val.error);
-
+    const appConfig = useLS.get('app:config');
+    typeof appConfig != 'undefined' && appConfig.theme == dark_mode && darkMode(); 
+    
 });
 
 // detect change hash ===============================================
-window.addEventListener('hashchange', e => {
-    let { hash } = e.target.location;
+on(window,'hashchange', () => {
+    let {hash} = location;
     let index = detectIndex(hash);
     let {url} = channels[index];
     init(url)
@@ -112,18 +116,20 @@ const prevChannel = () => {
 
 const darkMode = () => {
 	const span = btnDarkMode.getElementsByTagName('span')[0];
-
 	document.body.classList.toggle('dark');
 	btnDarkMode.classList.toggle('on');
 
-	if (document.body.classList.contains('dark'))
-		span.innerText = 'light_mode';
-	else
-		span.innerText = 'dark_mode';	
+	if (document.body.classList.contains("dark")) {
+    useLS.set("app:config", { theme: dark_mode });
+    span.innerText = light_mode;
+  } else {
+    span.innerText = dark_mode;
+    useLS.set("app:config", { theme: light_mode });
+  }
 }
 
 // change channel =================================================
-document.addEventListener('keydown', e => {
+on(document,'keydown', e => {
     if(e.key === 'ArrowRight'){
         nextChannel();
     }
@@ -132,14 +138,14 @@ document.addEventListener('keydown', e => {
     }
 })
 
-btnNext.addEventListener('click', e => {
+on(btnNext,'click', () => {
     nextChannel();
 });
 
-btnPrev.addEventListener('click', e => {
+on(btnPrev,'click', () => {
     prevChannel();
 });
 
-btnDarkMode.addEventListener('click', e => {
+on(btnDarkMode,'click', () => {
     darkMode();
 });
