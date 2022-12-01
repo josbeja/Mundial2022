@@ -11,7 +11,7 @@ const light_mode = "light_mode",
 const channels = [
     {
         name: 'dSports',
-        url: 'https://dtvott-abc.akamaized.net/dash_live_1061/manifest.mpd?&ck=eyI3MTE5MDY5Yjk5MDE1YjRlYjllZTQzMDA1NzczOTllMiIgOiAiYjg5ODI3Y2M5NzBjZDc4ZGE4ODJmZmNhMzUwNGM3NzQifQ=='
+        url: 'https://dtvott-abc.akamaized.net/dash_live_1061/manifest.mpd?&ck=eyI3MTE5MDY5Yjk5MDE1YjRlYjllZTQzMDA1NzczOTllMiI6ImI4OTgyN2NjOTcwY2Q3OGRhODgyZmZjYTM1MDRjNzc0In0='
     },
     {
         name: 'tycSports',
@@ -20,10 +20,6 @@ const channels = [
     {
         name: 'tvPublica',
         url: 'https://edge-live17-sl.cvattv.com.ar/live/c6eds/Canal7/SA_Live_dash_enc_2A/Canal7.mpd?&ck=eyJjYzhjODJhYzJlYzdlOTc5OTUyN2MyOWRiNzM1NGU4MSIgOiAiY2M0YWFlMTczZGQyZWYxN2FlMjZiZTNmN2FlODc2NjIifQ=='
-    },
-    {
-        name: 'deporTv',
-        url: 'https://dtvott-abc.akamaized.net/dash_live_1056/manifest.mpd?&ck=eyIwMGE3NzVkMWI5NmI1OTUxYjNjM2FiNTc5OWY5ODY4ZSIgOiAiM2E1NmRmMDA0N2RkNzA5Mzg4YzYwNmY5ZmYyZmJhZGQifQ=='
     },
     {
         name: 'azteca7',
