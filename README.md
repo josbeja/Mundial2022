@@ -27,8 +27,8 @@ php -S localhost:8080
 ``` 
 
 Si tenes **python 3** instalado ejecuta:
-```php
-// Inicia un servidor en localhost:[puerto]
+```python
+# Inicia un servidor en localhost:[puerto]
 python -m http.server 8081
 ```
 
