@@ -123,26 +123,17 @@ const darkMode = () => {
     useLS.set("app:config", { theme: light_mode });
   }
 }
-
+const handleKeyboard = (e) => {
+    (e.key === 'ArrowRight') && nextChannel();
+    (e.key === 'ArrowLeft') && prevChannel();
+}
 // change channel =================================================
-// la funcion "on" no funciona con keydown
-document.addEventListener('keydown', e => {
-    if(e.key === 'ArrowRight'){
-        nextChannel();
-    }
-    if(e.key === 'ArrowLeft'){
-        prevChannel();
-    }
-});
-
-on(btnNext,'click', () => {
-    nextChannel();
-});
-
-on(btnPrev,'click', () => {
-    prevChannel();
-});
-
-on(btnDarkMode,'click', () => {
-    darkMode();
+const elEvFn = [
+  { el: document, ev: "keydown", fn: handleKeyboard },
+  { el: btnNext, ev: "click", fn: nextChannel },
+  { el: btnPrev, ev: "click", fn: prevChannel },
+  { el: btnDarkMode, ev: "click", fn: darkMode },
+];
+elEvFn.forEach(({ el, ev, fn }) => {
+  on(el, ev, fn);
 });
