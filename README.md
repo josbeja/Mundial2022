@@ -27,4 +27,4 @@ python -m http.server 8081
 ```
 
 ---
-Esté proyecto se creo sin fines de lucro, no cuenta con publicidades y es mantenida por desarrolladores que aportan sus conocimientos en el lenguaje <br> *Los enlaces se obtienen de plataformas de terceros y no de plataformas oficiales*.
+Esté proyecto se creo sin fines de lucro, no cuenta con publicidades y es mantenido por desarrolladores que aportan sus conocimientos en el lenguaje <br> *Los enlaces se obtienen de plataformas de terceros y no de plataformas oficiales*.
