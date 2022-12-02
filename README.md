@@ -1,28 +1,26 @@
-# Mira los partidos del Mundial 2022 sin anuncios molestos, (una app creada exclusivamente para vos)
+# Mira los partidos del Mundial 2022 sin anuncios molestos, (una app creada exclusivamente para vos) ✨
 
-Tutorial de como usar la app en mi [tiktok](https://www.tiktok.com/@zalazarc20)
+✅ Tutorial de como usar la app en mi [tiktok](https://www.tiktok.com/@zalazarc20)
 
-Lista de cambios:
+👉 Lista de cambios:
 - Dark Mode (by [@amaillo-coop](https://github.com/amaillo-coop))
 - El modo oscuro ahora mantiene la configuración (by [@itskreisler](https://github.com/itskreisler))
   - Helpers.js añadido para reducir el código que se repite
 
 ## Run script
-
 Para ejecutar el codigo de forma local, puedes usar la extension de [web server for chrome](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb) <br>
 Tambien tienes otra opción como el [Live Server](https://youtu.be/eM2xzvUTasQ) de [Visual Studio Code](https://youtu.be/cO5n3vMLdjE?t=14).
 
-
-### Si tienes **php** instalado ejecuta:
+Si tienes **php** instalado ejecuta:
 ```php
 // Para iniciar un servidor local
 // php -S localhost:[puerto]
 php -S localhost:8080
 ``` 
 
-### Si tenes **python 3** instalado ejecuta:
-```js
-// Inicia un servidor local en localhost:[puerto]
+Si tenes **python 3** instalado ejecuta:
+```php
+// Inicia un servidor en localhost:[puerto]
 python -m http.server 8081
 ```
 
