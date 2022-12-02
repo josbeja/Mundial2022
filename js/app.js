@@ -125,14 +125,15 @@ const darkMode = () => {
 }
 
 // change channel =================================================
-on(document,'keydown', e => {
+// la funcion "on" no funciona con keydown
+document.addEventListener('keydown', e => {
     if(e.key === 'ArrowRight'){
         nextChannel();
     }
     if(e.key === 'ArrowLeft'){
         prevChannel();
     }
-})
+});
 
 on(btnNext,'click', () => {
     nextChannel();
