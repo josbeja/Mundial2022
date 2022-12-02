@@ -25,3 +25,6 @@ php -S localhost:8080
 // Inicia un servidor local en localhost:[puerto]
 python -m http.server 8081
 ```
+
+---
+### Esté proyecto se creo sin fines de lucro, no cuenta con publicidades y es mantenida por desarrolladores que aportan sus conocimientos en el lenguaje <br> *Los enlaces se obtienen de plataformas de terceros y no de plataformas oficiales*.
