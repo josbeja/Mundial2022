@@ -7,9 +7,17 @@
 - El modo oscuro ahora mantiene la configuración (by [@itskreisler](https://github.com/itskreisler))
   - Helpers.js añadido para reducir el código que se repite
 
-## Run script
+## Run with PC
+
 Para ejecutar el codigo de forma local, puedes usar la extension de [web server for chrome](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb) <br>
 Tambien tienes otra opción como el [Live Server](https://youtu.be/eM2xzvUTasQ) de [Visual Studio Code](https://youtu.be/cO5n3vMLdjE?t=14).
+
+## Run with mobile
+
+En sistemas **Android** puede usar [spck code editor](https://play.google.com/store/apps/details?id=io.spck&hl=es_419&gl=US&pli=1), o tambien [termux](https://play.google.com/store/apps/details?id=com.termux&hl=es_419&gl=US) y [termux live server](https://github.com/brunodavi/termux-live-server) <br>
+En sistemas **Ios** puede usar [spck code editor](https://play.google.com/store/apps/details?id=io.spck&hl=es_419&gl=US&pli=1), o tambien [ish shell](https://beebom.com/run-simple-web-server-iphone/)
+
+## Run script
 
 Si tienes **php** instalado ejecuta:
 ```php
