@@ -35,12 +35,12 @@ const V = (_) => document.querySelector(_);
 const Vall = (_) => document.querySelectorAll(_);
 /**
  * Si el primer argumento es una instancia de HTMLElement, entonces agregue un oyente de eventos.
- * @param {HTMLElement} el - El elemento al que desea agregar el evento.
+ * @param el - El elemento al que desea agregar el evento.
  * @param {string} typeevent - El tipo de evento.
  * @param {function} callback - La función a llamar cuando se activa el evento.
  */
 const on = (el, typeevent, callback) => {
-  el && el.addEventListener(typeevent, (...e) => callback(e));
+  el && el.addEventListener(typeevent, (...e) => callback(...e));
 };
 /**
  * Si el primer argumento es un Nodelist, y tiene una longitud mayor que cero, entonces para cada elemento en

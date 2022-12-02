@@ -14,7 +14,7 @@ Tambien tienes otra opción como el [Live Server](https://youtu.be/eM2xzvUTasQ) 
 
 ## Run with mobile
 
-En sistemas **Android** puede usar [spck code editor](https://play.google.com/store/apps/details?id=io.spck&hl=es_419&gl=US&pli=1), o tambien [termux](https://play.google.com/store/apps/details?id=com.termux&hl=es_419&gl=US) y [termux live server](https://github.com/brunodavi/termux-live-server) <br>
+En sistemas **Android** puede usar [spck code editor](https://play.google.com/store/apps/details?id=io.spck&hl=es_419&gl=US&pli=1), o tambien [termux](https://github.com/termux/termux-app/releases) y [termux live server](https://github.com/brunodavi/termux-live-server) <br>
 En sistemas **Ios** puede usar [spck code editor](https://play.google.com/store/apps/details?id=io.spck&hl=es_419&gl=US&pli=1), o tambien [ish shell](https://beebom.com/run-simple-web-server-iphone/)
 
 ## Run script
