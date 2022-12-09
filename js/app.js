@@ -1,16 +1,17 @@
 import { init } from "./Player.js";
-
-const main = document.getElementById('app');
-const btnNext = document.getElementById('next-channel');
-const btnPrev = document.getElementById('prev-channel');
-const btnDarkMode = document.getElementById('darkmode');
-const channelName = document.getElementById('channel');
-const messageContainer = document.getElementById('message-channel');
-
+import { V, on, useLS } from "./helpers.js";
+const main = V('#app');
+const btnNext = V('#next-channel');
+const btnPrev = V('#prev-channel');
+const btnDarkMode = V('#darkmode');
+const channelName = V('#channel');
+const messageContainer = V('#message-channel');
+const light_mode = "light_mode",
+      dark_mode = "dark_mode";
 const channels = [
     {
         name: 'dSports',
-        url: 'https://dtvott-abc.akamaized.net/dash_live_1061/manifest.mpd?&ck=eyI3MTE5MDY5Yjk5MDE1YjRlYjllZTQzMDA1NzczOTllMiIgOiAiYjg5ODI3Y2M5NzBjZDc4ZGE4ODJmZmNhMzUwNGM3NzQifQ=='
+        url: 'https://dtvott-abc.akamaized.net/dash_live_1061/manifest.mpd?&ck=eyI3MTE5MDY5Yjk5MDE1YjRlYjllZTQzMDA1NzczOTllMiI6ImI4OTgyN2NjOTcwY2Q3OGRhODgyZmZjYTM1MDRjNzc0In0='
     },
     {
         name: 'tycSports',
@@ -19,10 +20,6 @@ const channels = [
     {
         name: 'tvPublica',
         url: 'https://edge-live17-sl.cvattv.com.ar/live/c6eds/Canal7/SA_Live_dash_enc_2A/Canal7.mpd?&ck=eyJjYzhjODJhYzJlYzdlOTc5OTUyN2MyOWRiNzM1NGU4MSIgOiAiY2M0YWFlMTczZGQyZWYxN2FlMjZiZTNmN2FlODc2NjIifQ=='
-    },
-    {
-        name: 'deporTv',
-        url: 'https://dtvott-abc.akamaized.net/dash_live_1056/manifest.mpd?&ck=eyIwMGE3NzVkMWI5NmI1OTUxYjNjM2FiNTc5OWY5ODY4ZSIgOiAiM2E1NmRmMDA0N2RkNzA5Mzg4YzYwNmY5ZmYyZmJhZGQifQ=='
     },
     {
         name: 'azteca7',
@@ -54,19 +51,20 @@ const changeChannel = (arr, i = 0) => {
 }
 
 const validHash = (hash) => {
-    // saque esté canal del if hash === '#directvSports'
-    if( hash === '#tycSports' || hash === '#tvPublica' || hash === '#dSports' || hash === '#deporTv' || hash === '#azteca7'){
+    // Se valida el hash directamente con la lista de canales
+    const isValidHash = ({name}) => `#${name}` === hash;
+    const ifValidHash = channels.some(isValidHash);
+    if (ifValidHash){
         count = detectIndex(hash);
         let {url} = channels[count];
         return url;
     }
     if(hash === '') return {error: 'No pasaste ningun hash'}
-
     return {error: 'error esté hash NO ES VALIDO'}
 }
 
 // add shaka-player ===========================================
-document.addEventListener('shaka-ui-loaded', async e => {
+on(document,'shaka-ui-loaded', async e => {
     const channel = channels[count].name
     location.hash = channel
     addName(channel.toUpperCase())
@@ -80,19 +78,21 @@ document.addEventListener('shaka-ui-loaded', async e => {
 });
 
 // detect hash in load DOM =========================================
-document.addEventListener('DOMContentLoaded', e => {
+on(document,'DOMContentLoaded', () => {
     let {hash} = location;
 
     let val = validHash(hash);
     typeof val === 'string'
         ? init(val)
         : console.error(val.error);
-
+    const appConfig = useLS.get('app:config');
+    typeof appConfig != 'undefined' && appConfig.theme == dark_mode && darkMode(); 
+    
 });
 
 // detect change hash ===============================================
-window.addEventListener('hashchange', e => {
-    let { hash } = e.target.location;
+on(window,'hashchange', () => {
+    let {hash} = location;
     let index = detectIndex(hash);
     let {url} = channels[index];
     init(url)
@@ -112,34 +112,28 @@ const prevChannel = () => {
 
 const darkMode = () => {
 	const span = btnDarkMode.getElementsByTagName('span')[0];
-
 	document.body.classList.toggle('dark');
 	btnDarkMode.classList.toggle('on');
 
-	if (document.body.classList.contains('dark'))
-		span.innerText = 'light_mode';
-	else
-		span.innerText = 'dark_mode';	
+	if (document.body.classList.contains("dark")) {
+    useLS.set("app:config", { theme: dark_mode });
+    span.innerText = light_mode;
+  } else {
+    span.innerText = dark_mode;
+    useLS.set("app:config", { theme: light_mode });
+  }
 }
-
+const handleKeyboard = (e) => {
+    (e.key === 'ArrowRight') && nextChannel();
+    (e.key === 'ArrowLeft') && prevChannel();
+}
 // change channel =================================================
-document.addEventListener('keydown', e => {
-    if(e.key === 'ArrowRight'){
-        nextChannel();
-    }
-    if(e.key === 'ArrowLeft'){
-        prevChannel();
-    }
-})
-
-btnNext.addEventListener('click', e => {
-    nextChannel();
-});
-
-btnPrev.addEventListener('click', e => {
-    prevChannel();
-});
-
-btnDarkMode.addEventListener('click', e => {
-    darkMode();
+const elEvFn = [
+  { el: document, ev: "keydown", fn: handleKeyboard },
+  { el: btnNext, ev: "click", fn: nextChannel },
+  { el: btnPrev, ev: "click", fn: prevChannel },
+  { el: btnDarkMode, ev: "click", fn: darkMode },
+];
+elEvFn.forEach(({ el, ev, fn }) => {
+  on(el, ev, fn);
 });
